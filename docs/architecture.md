@@ -62,3 +62,26 @@ Execute os testes por camada na ordem abaixo. Os resultados registrados são a l
 - Frontend: `npm test --prefix octofit-tracker/frontend` — linha de base: 15 falhas; três testes de exibição/consulta e, para cada rota, os estados de carregamento, vazio e erro não atendem ao contrato.
 - Compilação do backend: `npm run build --prefix octofit-tracker/backend` — ainda não executada; confirmar a tipagem depois das mudanças na API e nos modelos.
 - Compilação do frontend: `npm run build --prefix octofit-tracker/frontend` — ainda não executada; confirmar os tipos e o bundle depois das mudanças na apresentação.
+
+## Decisões de implementação
+ 
+Registre seu plano aqui antes de editar o código.
+ 
+- Decisão da camada de apresentação:
+- Decisão da camada de lógica:
+- Decisão da camada de dados:
+- Abordagem para registro de atividades:
+- Abordagem para gerenciamento de equipes:
+- Abordagem para o placar:
+- Abordagem para sugestões de treino:
+ 
+## Plano de testes
+ 
+Registre os comandos executados e o significado de cada falha.
+ 
+- Testes da camada de dados: npm run test:data --prefix octofit-tracker/backend
+- Testes da API: npm run test:api --prefix octofit-tracker/backend
+- Testes do frontend: npm test --prefix octofit-tracker/frontend
+- Compilação do backend: npm run build --prefix octofit-tracker/backend
+- Compilação do frontend: npm run build --prefix octofit-tracker/frontend
+ 

@@ -43,22 +43,22 @@ flowchart LR
 
 ## Decisões de implementação
 
-Registre seu plano aqui antes de editar o código.
+- Camada de apresentação: manter a interface em React e concentrar as chamadas HTTP no cliente compartilhado em `frontend/src/api`; cada página apresenta estados acessíveis de carregamento, vazio e erro.
+- Camada de lógica: manter validação e regras de negócio nas rotas e serviços Express, retornando respostas JSON consistentes e erros 4xx intencionais para entradas ou referências inválidas.
+- Camada de dados: usar os modelos Mongoose para validação e persistência; o seed deve criar dados representativos relacionados e poder ser executado novamente sem duplicar nem substituir dados não relacionados.
+- Registro de atividades: validar formato e existência de `userId` e `teamId` antes da conversão/persistência; calcular `points` e `occurredAt` no backend e devolver as referências e os valores calculados.
+- Gerenciamento de equipes: validar `name`, preservar `name` e `mascot` enviados e manter os integrantes associados pelos IDs de usuário.
+- Placar: agregar os pontos das atividades por equipe, ordenar do maior para o menor e atribuir posições começando em 1.
+- Sugestões de treino: localizar a pessoa pelo e-mail, usar sua meta ou atividade recente para priorizar o foco e incluir uma justificativa; retornar 4xx quando a pessoa não existir.
 
-- Decisão da camada de apresentação:
-- Decisão da camada de lógica:
-- Decisão da camada de dados:
-- Abordagem para registro de atividades:
-- Abordagem para gerenciamento de equipes:
-- Abordagem para o placar:
-- Abordagem para sugestões de treino:
+Implemente e valide nesta ordem: modelos/seed, serviços e rotas da API, depois cliente e páginas do frontend. Essa sequência testa cada camada antes que a seguinte dependa dela.
 
 ## Plano de testes
 
-Registre os comandos executados e o significado de cada falha.
+Execute os testes por camada na ordem abaixo. Os resultados registrados são a linha de base observada antes da implementação; uma falha aponta o contrato ainda não atendido naquela camada.
 
-- Testes da camada de dados: `npm run test:data --prefix octofit-tracker/backend`
-- Testes da API: `npm run test:api --prefix octofit-tracker/backend`
-- Testes do frontend: `npm test --prefix octofit-tracker/frontend`
-- Compilação do backend: `npm run build --prefix octofit-tracker/backend`
-- Compilação do frontend: `npm run build --prefix octofit-tracker/frontend`
+- Dados: `npm run test:data --prefix octofit-tracker/backend` — linha de base: 4 falhas e 1 aprovação; as falhas indicam validações incompletas nos modelos de pessoa, equipe, atividade e treino. O teste de seed passa.
+- API: `npm run test:api --prefix octofit-tracker/backend` — linha de base: 4 falhas; atividades, equipes, placar e sugestões ainda não atendem aos contratos. A primeira requisição inválida recebe `501` em vez de `400`.
+- Frontend: `npm test --prefix octofit-tracker/frontend` — linha de base: 15 falhas; três testes de exibição/consulta e, para cada rota, os estados de carregamento, vazio e erro não atendem ao contrato.
+- Compilação do backend: `npm run build --prefix octofit-tracker/backend` — ainda não executada; confirmar a tipagem depois das mudanças na API e nos modelos.
+- Compilação do frontend: `npm run build --prefix octofit-tracker/frontend` — ainda não executada; confirmar os tipos e o bundle depois das mudanças na apresentação.
